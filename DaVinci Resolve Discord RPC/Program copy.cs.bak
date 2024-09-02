@@ -1,0 +1,138 @@
+﻿using System;
+using System.Diagnostics;
+using System.Threading;
+using System.IO;
+using System.Text.Json;
+using DiscordRPC;
+using DiscordRPC.Logging;
+
+class Program
+{
+    private static DiscordRpcClient client = null!;
+    private const string CONFIG_FILE = "config.json";
+    private static DateTime lastUpdateTime = DateTime.UtcNow;
+    private static TimeSpan presenceDuration = TimeSpan.Zero;
+
+    static void Main(string[] args)
+    {
+        string discordAppId = GetDiscordAppId();
+        InitializeDiscordClient(discordAppId);
+
+        while (true)
+        {
+            if (IsDaVinciResolveRunning())
+            {
+                string projectName = GetCurrentProjectName();
+
+                // Update presence duration
+                UpdatePresenceDuration();
+
+                // Debugging: Log the project name and duration
+                Console.WriteLine($"Current project name: {projectName}");
+                Console.WriteLine($"Presence duration: {presenceDuration}");
+
+                UpdatePresence(projectName);
+            }
+            else
+            {
+                Console.WriteLine("DaVinci Resolve is not running.");
+                client.ClearPresence();
+                presenceDuration = TimeSpan.Zero; // Reset duration when not running
+            }
+
+            Thread.Sleep(15000); // Check every 15 seconds
+        }
+    }
+
+    static string GetDiscordAppId()
+    {
+        if (File.Exists(CONFIG_FILE))
+        {
+            string json = File.ReadAllText(CONFIG_FILE);
+            var config = JsonSerializer.Deserialize<Config>(json);
+
+            if (config?.DiscordAppId == null)
+            {
+                throw new InvalidOperationException("DiscordAppId cannot be null.");
+            }
+
+            return config.DiscordAppId;
+        }
+        else
+        {
+            Console.Write("Enter your Discord Application ID: ");
+            string discordAppId = Console.ReadLine() ?? throw new InvalidOperationException("DiscordAppId cannot be null.");
+            var config = new Config { DiscordAppId = discordAppId };
+            string json = JsonSerializer.Serialize(config, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(CONFIG_FILE, json);
+            return discordAppId;
+        }
+    }
+
+    static void InitializeDiscordClient(string discordAppId)
+    {
+        client = new DiscordRpcClient(discordAppId);
+
+        client.Logger = new ConsoleLogger() { Level = LogLevel.Warning };
+
+        client.OnReady += (sender, e) =>
+        {
+            Console.WriteLine("Discord RPC Client ready");
+        };
+
+        client.OnPresenceUpdate += (sender, e) =>
+        {
+            Console.WriteLine("Presence has been updated!");
+        };
+
+        client.Initialize();
+    }
+
+    static bool IsDaVinciResolveRunning()
+    {
+        Process[] processes = Process.GetProcessesByName("Resolve");
+        return processes.Length > 0;
+    }
+
+    static string GetCurrentProjectName()
+    {
+        // Placeholder for actual project name retrieval
+        return "DaVinci Resolve Project";
+    }
+
+    static void UpdatePresenceDuration()
+    {
+        // Update the presence duration
+        if (IsDaVinciResolveRunning())
+        {
+            presenceDuration = DateTime.UtcNow - lastUpdateTime;
+        }
+        else
+        {
+            lastUpdateTime = DateTime.UtcNow;
+        }
+    }
+
+    static void UpdatePresence(string projectName)
+    {
+        client.SetPresence(new RichPresence()
+        {
+            Details = $"Editing: {projectName}",
+            State = "Using DaVinci Resolve",
+            Assets = new Assets()
+            {
+                LargeImageKey = "davinci_resolve_logo", // Ensure this matches exactly with your uploaded image key
+                LargeImageText = "DaVinci Resolve"
+            },
+            Timestamps = new Timestamps()
+            {
+                Start = DateTime.UtcNow - presenceDuration // Correctly set start time based on duration
+            }
+        });
+    }
+}
+
+class Config
+{
+    public string DiscordAppId { get; set; } = string.Empty;
+}

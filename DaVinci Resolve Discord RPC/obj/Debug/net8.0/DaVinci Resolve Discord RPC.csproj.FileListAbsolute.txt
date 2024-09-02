@@ -1,0 +1,18 @@
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\bin\Debug\net8.0\DaVinci Resolve Discord RPC.exe
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\bin\Debug\net8.0\DaVinci Resolve Discord RPC.deps.json
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\bin\Debug\net8.0\DaVinci Resolve Discord RPC.runtimeconfig.json
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\bin\Debug\net8.0\DaVinci Resolve Discord RPC.dll
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\bin\Debug\net8.0\DaVinci Resolve Discord RPC.pdb
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\bin\Debug\net8.0\DiscordRPC.dll
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\DaVinci Resolve Discord RPC.csproj.AssemblyReference.cache
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\DaVinci Resolve Discord RPC.GeneratedMSBuildEditorConfig.editorconfig
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\DaVinci Resolve Discord RPC.AssemblyInfoInputs.cache
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\DaVinci Resolve Discord RPC.AssemblyInfo.cs
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\DaVinci Resolve Discord RPC.csproj.CoreCompileInputs.cache
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\DaVinci .4782E315.Up2Date
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\DaVinci Resolve Discord RPC.dll
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\refint\DaVinci Resolve Discord RPC.dll
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\DaVinci Resolve Discord RPC.pdb
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\DaVinci Resolve Discord RPC.genruntimeconfig.cache
+D:\coding\C#\DaVinci Resolve Discord RPC\DaVinci Resolve Discord RPC\obj\Debug\net8.0\ref\DaVinci Resolve Discord RPC.dll

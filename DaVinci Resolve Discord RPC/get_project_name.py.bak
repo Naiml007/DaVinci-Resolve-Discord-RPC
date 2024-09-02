@@ -1,0 +1,23 @@
+import DaVinciResolveScript as dvr_script
+
+def get_project_name():
+    resolve = dvr_script.scriptapp('Resolve')
+    if not resolve:
+        raise RuntimeError("Unable to connect to DaVinci Resolve.")
+    
+    project_manager = resolve.GetProjectManager()
+    current_project = project_manager.GetCurrentProject()
+    
+    if current_project:
+        return current_project.GetName()
+    else:
+        return "No project is currently open."
+
+if __name__ == "__main__":
+    import sys
+    try:
+        project_name = get_project_name()
+        print(project_name)
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
