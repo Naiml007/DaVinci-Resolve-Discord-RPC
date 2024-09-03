@@ -22,7 +22,7 @@ class Program
         {
             if (IsDaVinciResolveRunning())
             {
-                string projectName = GetCurrentProjectName();
+                string projectName = GetDaVinciResolveProjectName();
 
                 // Update presence duration
                 UpdatePresenceDuration();
@@ -86,14 +86,32 @@ class Program
         return processes.Length > 0;
     }
 
-    static string GetCurrentProjectName()
+    static string GetDaVinciResolveProjectName()
     {
         try
         {
-            // Placeholder for the actual implementation
-            // You need to implement the actual code to retrieve the current project name
-            // For example, it might involve COM interactions or reading specific files
-            return "DaVinci Resolve Project";
+            // Get all processes with the name "Resolve"
+            Process[] processes = Process.GetProcessesByName("Resolve");
+
+            foreach (Process process in processes)
+            {
+                // Get the main window title
+                string windowTitle = process.MainWindowTitle;
+
+                // Check if the window title contains "DaVinci Resolve"
+                if (windowTitle.Contains("DaVinci Resolve"))
+                {
+                    // Extract the project name from the title
+                    // Assuming format: "DaVinci Resolve - [Project Name]"
+                    int dashIndex = windowTitle.IndexOf(" - ");
+                    if (dashIndex >= 0)
+                    {
+                        return windowTitle.Substring(dashIndex + 3); // +3 to skip " - "
+                    }
+                }
+            }
+
+            return "Unknown Project";
         }
         catch (Exception ex)
         {
